@@ -1,59 +1,95 @@
-# CrmEmpleados
+# CRM Empleados
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+## Componentes
 
-## Development server
+- **Home** (page)
+- **Login** (page)
+- **Dashboard** (page)
+  - **FormEmpleado** (page)
+  - **VistaEmpleado** (page)
+  - **Nav** (componente): Se carga dentro de Dashboard.
+  - **CardEmpleado** (componente): Se carga dentro de Dashboard.
 
-To start a local development server, run:
+## Rutas
 
-```bash
-ng serve
-```
+Las rutas ayudan a identificar qué componentes son de tipo **PAGES**:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- `/home` => `HomeComponent`
+- `/login` => `LoginComponent`
+- `/dashboard` => `DashboardComponent`
+  - `/dashboard/nuevo` => `FormEmpleado`
+  - `/dashboard/update/:id` => `FormEmpleado`
+  - `/dashboard/empleado/:id` => `VistaEmpleado`
 
-## Code scaffolding
+## Servicios
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Usuarios**
+  - `login()`: Iniciar sesión en la aplicación.
+- **Empleados**
+  - `getAll()`: Obtener todos los empleados.
+  - `getById(id)`: Obtener un empleado por su ID.
+  - `insert(Empleado)`: Insertar un nuevo empleado.
+  - `update(EmpleadoActualizado)`: Actualizar un empleado existente.
+  - `delete(id)`: Eliminar un empleado por su ID.
 
-```bash
-ng generate component component-name
-```
+## Interfaces
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Usuario**
+- **Empleado**
 
-```bash
-ng generate --help
-```
+## Guard
 
-## Building
+- **AuthGuard**: Protege las rutas de la aplicación, asegurando que solo los usuarios autenticados puedan acceder a ellas.
 
-To build the project run:
+## Empezamos
 
-```bash
-ng build
-```
+`ng new crm-empleados`
+`cd crm-empleados`
+`ng ng generate component pages/home --skip-tests`
+`ng ng generate component pages/login --skip-tests`
+`ng ng generate component pages/dashboard --skip-tests`
+`ng ng generate component pages/FormEmployee --skip-tests`
+`ng ng generate component pages/ViewEmployee --skip-tests`
+`ng ng generate component components/NavBar --skip-tests`
+`ng ng generate component components/CardEmployee --skip-tests`
+`ng ng generate service services/users --skip-tests`
+`ng ng generate service services/employees --skip-tests`
+`ng ng generate interface interfaces/user --type=interface`
+`ng ng generate interface interfaces/employee --type=interface`
+`ng ng generate guard guards/auth`
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Ruta de API
 
-## Running unit tests
+### Base URL
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+`https://crm-empleados.onrender.com/api/`
 
-```bash
-ng test
-```
+### Endpoints
 
-## Running end-to-end tests
+#### Empleados
 
-For end-to-end (e2e) testing, run:
+- **GET** `/empleados`  
+  Obtener todos los empleados.
+- **GET** `/empleados/:id`  
+  Obtener un empleado por su ID.
+- **POST** `/empleados`  
+  Insertar un nuevo empleado (requiere datos en el cuerpo de la solicitud).
+- **PUT** `/empleados/:id`  
+  Actualizar un empleado existente (requiere datos en el cuerpo de la solicitud).
+- **DELETE** `/empleados/:id`  
+  Eliminar un empleado por su ID.
 
-```bash
-ng e2e
-```
+#### Usuarios
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- **POST** `/usuarios/login`  
+  Iniciar sesión en la aplicación (requiere datos en el cuerpo de la solicitud).
 
-## Additional Resources
+#### Login Page
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## La receta para crear formularios sin dolor
+
+1. Importa la librería `ReactiveFormsModule` en el componente donde se usará el formulario.
+2. Agrega un atributo `formGroup` a la etiqueta `<form>` que contendrá el nombre del formulario.
+3. Implementa el evento `(ngSubmit)` en el formulario para llamar a una función que **no recibe parámetros**. Esta función generará un objeto JSON con los datos del formulario.
+4. En cada campo del formulario (`<input>`, `<select>`, `<textarea>`, etc.), añade el atributo `formControlName` con el nombre del campo correspondiente.
+5. Inicializa en el archivo `.ts` el objeto `FormGroup` creado en el paso 2. Es obligatorio registrar cada uno de los campos en este objeto, y aquí es donde se configuran los validadores necesarios.
