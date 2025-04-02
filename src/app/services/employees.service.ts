@@ -19,4 +19,10 @@ export class EmployeesService {
   remove(id: string): Promise<Employee> {
     return lastValueFrom(this.http.delete<Employee>(`${this.BASE_URL}/${id}`));
   }
+
+  getById(idEmployee: string): Promise<Employee> {
+    return lastValueFrom(
+      this.http.get<Employee>(`${this.BASE_URL}/${idEmployee}`)
+    );
+  }
 }
