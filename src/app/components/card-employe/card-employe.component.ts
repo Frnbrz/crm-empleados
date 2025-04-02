@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Employee } from '../../interfaces/employee.interface';
 import { EmployeesService } from '../../services/employees.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-card-employe',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './card-employe.component.html',
   styleUrl: './card-employe.component.css',
 })

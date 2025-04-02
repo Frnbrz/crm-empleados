@@ -25,8 +25,18 @@
         </div>
         <footer class="card-text">
           <div class="d-flex justify-content-end gap-2">
-            <button class="btn btn-primary btn-sm">Ver Detalle</button>
-            <button class="btn btn-warning btn-sm">Actualizar</button>
+            <button
+              class="btn btn-primary btn-sm"
+              [routerLink]="['/dashboard', 'employee', employee._id]"
+            >
+              Ver Detalle
+            </button>
+            <button
+              class="btn btn-warning btn-sm"
+              [routerLink]="['/dashboard', 'update', employee._id]"
+            >
+              Actualizar
+            </button>
             <button
               class="btn btn-danger btn-sm"
               (click)="onDeleteEmployee(employee._id)"
