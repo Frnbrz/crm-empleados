@@ -1,1 +1,51 @@
-<p>view-employe works!</p>
+@if (employee) {
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2 class="text-center">Información del Empleado</h2>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Nombre:</strong>
+          <p>{{ employee.nombre }}</p>
+        </div>
+        <div class="col-md-6">
+          <strong>Apellidos:</strong>
+          <p>{{ employee.apellidos }}</p>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Email:</strong>
+          <p>{{ employee.email }}</p>
+        </div>
+        <div class="col-md-6">
+          <strong>Teléfono:</strong>
+          <p>{{ employee.telefono }}</p>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Departamento:</strong>
+          <p>{{ employee.departamento }}</p>
+        </div>
+        <div class="col-md-6">
+          <strong>Salario:</strong>
+          <p>{{ employee.salario | currency }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Fecha de Creación:</strong>
+          <p>{{ employee.createAt | date : "short" }}</p>
+        </div>
+        <div class="col-md-6">
+          <strong>Última Actualización:</strong>
+          <p>{{ employee.updateAt | date : "short" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
